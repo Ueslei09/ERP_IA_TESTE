@@ -1,48 +1,32 @@
-import { ref } from "vue";
-import {
-  listErpRecords,
-  createErpRecord,
-  removeErpRecord,
-} from "../services/homeErpService";
+import { ref, computed } from "vue";
+import { homeBackgroundConfig } from "../services/homeErpService";
 
 export function useHomeErp(router = null) {
-  const records = ref([]);
-  const title = ref("");
-  const statusMessage = ref("");
-  const isLoading = ref(false);
+  const mediaFailed = ref(false);
 
-  async function loadRecords() {
-    isLoading.value = true;
-    try {
-      records.value = await listErpRecords();
-      statusMessage.value = "Conectado ao backend com sucesso!";
-    } catch (err) {
-      statusMessage.value = `Erro: ${err?.message || "Falha ao carregar."}`;
-    } finally {
-      isLoading.value = false;
+  const backgroundConfig = computed(() => {
+    const cfg = homeBackgroundConfig || {};
+    const requestedType = cfg.type === "video" ? "video" : "image";
+
+    if (requestedType === "video") {
+      if (cfg.videoSrc && !mediaFailed.value) {
+        return { ...cfg, activeType: "video" };
+      }
+      if (cfg.imageSrc) {
+        return { ...cfg, activeType: "image" };
+      }
+      return { ...cfg, activeType: "fallback" };
     }
-  }
 
-  async function addRecord() {
-    const cleanTitle = title.value.trim();
-    if (!cleanTitle) return;
-
-    try {
-      await createErpRecord(cleanTitle);
-      title.value = "";
-      await loadRecords();
-    } catch (err) {
-      statusMessage.value = `Erro ao salvar: ${err?.message || "Falha ao criar."}`;
+    if (cfg.imageSrc && !mediaFailed.value) {
+      return { ...cfg, activeType: "image" };
     }
-  }
 
-  async function deleteRecord(id) {
-    try {
-      await removeErpRecord(id);
-      await loadRecords();
-    } catch (err) {
-      statusMessage.value = `Erro ao excluir: ${err?.message || "Falha ao excluir."}`;
-    }
+    return { ...cfg, activeType: "fallback" };
+  });
+
+  function handleMediaError() {
+    mediaFailed.value = true;
   }
 
   async function logout() {
@@ -56,13 +40,8 @@ export function useHomeErp(router = null) {
   }
 
   return {
-    records,
-    title,
-    statusMessage,
-    isLoading,
-    loadRecords,
-    addRecord,
-    deleteRecord,
+    backgroundConfig,
+    handleMediaError,
     logout,
   };
 }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../login/views/LoginView.vue";
-import HomeErpView from "../modules/views/HomeErpView.vue"; // ajuste o caminho se necessário
+import HomeErpView from "../modules/views/HomeErpView.vue"; 
+// ajuste o caminho se necessário
 
 function hasValidSessionToken() {
   if (typeof window === "undefined") return false;
@@ -29,6 +30,16 @@ const router = createRouter({
       component: HomeErpView,
       meta: { requiresAuth: true },
     },
+    {
+    path: "/cadastros/clientes",
+    name: "clientes",
+    component: HomeErpView,
+  },
+  {
+  path: "/cadastros/estados",
+  name: "estados",
+  component: HomeErpView,
+},
   ],
 });
 

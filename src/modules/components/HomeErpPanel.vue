@@ -1,70 +1,89 @@
-<script setup>
-defineProps({
-  records: {
-    type: Array,
-    default: () => [],
-  },
-  title: {
-    type: String,
-    default: "",
-  },
-  statusMessage: {
-    type: String,
-    default: "",
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-});
+<template>
+  <section class="erp-hero-stage position-relative w-100">
+    <div class="erp-hero-media-layer" aria-hidden="true">
+      <video
+        v-if="backgroundConfig.activeType === 'video'"
+        class="erp-hero-media"
+        :src="backgroundConfig.videoSrc"
+        :poster="backgroundConfig.videoPoster || backgroundConfig.imageSrc"
+        autoplay
+        muted
+        loop
+        playsinline
+        @error="handleMediaError"
+      ></video>
 
-const emit = defineEmits(["update:title", "submit", "delete", "logout"]);
+      <img
+        v-else-if="backgroundConfig.activeType === 'image'"
+        class="erp-hero-media"
+        :src="backgroundConfig.imageSrc"
+        :alt="backgroundConfig.imageAlt || 'Fundo do sistema ERP'"
+        @error="handleMediaError"
+      />
+
+      <div v-else class="erp-hero-media erp-hero-fallback"></div>
+
+      <div
+        class="erp-hero-overlay"
+        :style="{ backgroundColor: backgroundConfig.overlayColor || 'rgba(10, 25, 47, 0.42)' }"
+      ></div>
+    </div>
+
+    <div class="container position-relative z-1 py-4 py-md-5 text-white">
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2">
+        <h1 class="h4 fw-bold mb-0">Bem vindo!!</h1>
+        
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { useRouter } from "vue-router";
+import { useHomeErp } from "../composables/useHomeErp";
+
+const router = useRouter();
+const { backgroundConfig, handleMediaError, logout } = useHomeErp(router);
 </script>
 
-<template>
-  <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h1 class="h4 mb-0">Home ERP (Teste)</h1>
-      <button type="button" class="btn btn-outline-danger btn-sm" @click="emit('logout')">
-        Sair
-      </button>
-    </div>
+<style scoped>
+.erp-hero-stage {
+  min-height: calc(100vh - 56px);
+  min-height: calc(100dvh - 56px);
+  overflow: hidden;
+}
 
-    <div class="alert alert-info py-2 small">
-      {{ statusMessage || (isLoading ? "Carregando..." : "Pronto para testar.") }}
-    </div>
+.erp-hero-media-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
 
-    <form class="input-group mb-3" @submit.prevent="emit('submit')">
-      <input
-        :value="title"
-        type="text"
-        class="form-control"
-        placeholder="Digite um título para testar gravação..."
-        @input="emit('update:title', $event.target.value)"
-      />
-      <button type="submit" class="btn btn-primary">Salvar Teste</button>
-    </form>
+.erp-hero-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 
-    <ul class="list-group">
-      <li
-        v-for="item in records"
-        :key="item.id"
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span>
-          <strong>#{{ item.id }}</strong> — {{ item.title }} ({{ item.status }})
-        </span>
-        <button
-          type="button"
-          class="btn btn-outline-danger btn-sm"
-          @click="emit('delete', item.id)"
-        >
-          Excluir
-        </button>
-      </li>
-      <li v-if="records.length === 0" class="list-group-item text-muted small">
-        Nenhum registro ainda.
-      </li>
-    </ul>
-  </div>
-</template>
+.erp-hero-fallback {
+  background: linear-gradient(135deg, #0a192f 0%, #163a6b 100%);
+}
+
+.erp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 575.98px) {
+  .erp-hero-stage {
+    min-height: calc(100dvh - 52px);
+  }
+}
+</style>
