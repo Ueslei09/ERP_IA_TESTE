@@ -212,7 +212,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useCityRegistration } from "../composables/useCityRegistration";
+import { useCityRegistration } from "@/shared/composables/UseControlesPessoas/useCityRegistration";
 
 const router = useRouter();
 

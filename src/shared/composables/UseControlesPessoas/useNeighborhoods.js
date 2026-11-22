@@ -1,6 +1,6 @@
-// src/composables/useNeighborhoods.js
+// src/shared/composables/UseControlesPessoas/useNeighborhoods.js
 import { ref, computed, watch } from "vue";
-import { neighborhoodService } from "../services/neighborhoodService.js";
+import { neighborhoodService } from "@/shared/services/ControlesPessoasServices/neighborhoodService.js";
 
 const INITIAL_FORM = () => ({
   id: null,
@@ -122,7 +122,6 @@ export function useNeighborhoods() {
         uf: ufClean,
         nome: nomeClean,
       });
-      successMessage.value = "Bairro salvo com sucesso!";
       await fetchNeighborhoods();
       resetForm();
       successMessage.value = "Bairro salvo com sucesso!";

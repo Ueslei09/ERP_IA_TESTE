@@ -1,7 +1,7 @@
 // src/modules/cities/composables/useCityRegistration.js
 import { ref, computed } from "vue";
-import { fetchCities, saveCity, removeCityById } from "../services/cityServices";
-import { fetchStates } from "../services/stateService";
+import { fetchCities, saveCity, removeCityById } from "@/shared/services/ControlesPessoasServices/cityServices";
+import { fetchStates } from "@/shared/services/ControlesPessoasServices/stateService";
 
 function createEmptyForm() {
   return {

@@ -16,6 +16,14 @@
         <button
           type="button"
           class="btn btn-outline-secondary btn-sm"
+          @click="voltarParaHome"
+          :disabled="saving"
+        >
+          ← Voltar ao Home
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
           @click="resetForm"
           :disabled="saving"
         >
@@ -239,7 +247,10 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { useNeighborhoods } from "../composables/useNeighborhoods.js";
+import { useRouter } from "vue-router";
+import { useNeighborhoods } from "@/shared/composables/UseControlesPessoas/useNeighborhoods.js";
+
+const router = useRouter();
 
 const {
   cities,
@@ -258,6 +269,10 @@ const {
   saveNeighborhood,
   deleteNeighborhood,
 } = useNeighborhoods();
+
+function voltarParaHome() {
+  router.push({ name: "home" });
+}
 
 onMounted(() => {
   fetchNeighborhoods();

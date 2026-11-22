@@ -268,7 +268,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useStateRegistration } from "../composables/useStateRegistration";
+import { useStateRegistration } from "@/shared/composables/UseControlesPessoas/useStateRegistration";
 
 const router = useRouter();
 

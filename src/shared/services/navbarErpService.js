@@ -30,6 +30,23 @@ export const navbarErpConfig = {
             { label: "Cadastro de Lojas", to: "/cadastros/lojas", icon: "bi-shop" },
             { label: "Usuários", to: "/cadastros/usuarios", icon: "bi-person-gear" },
             { label: "Funcionários", to: "/cadastros/funcionarios", icon: "bi-person-badge" },
+            {
+              label: "Relatórios de Clientes",
+              to: "/cadastros/relatorios/clientes",
+              icon: "bi-file-earmark-bar-graph",
+            },
+          ],
+        },
+        {
+          id: "relatorio-gerais-pessoas",
+          title: "Relatório Gerais",
+          icon: "bi-clipboard-data",
+          routines: [
+            {
+              label: "Relatórios de Clientes",
+              to: "/cadastros/relatorios/clientes",
+              icon: "bi-file-earmark-bar-graph",
+            },
           ],
         },
         {
@@ -40,6 +57,9 @@ export const navbarErpConfig = {
             { label: "Estados (UF / ICMS / DIFAL)", to: "/cadastros/estados", icon: "bi-map" },
             { label: "Cadastro de Cidades", to: "/cadastros/cidades", icon: "bi-building" },
             { label: "Cadastro de Bairros", to: "/cadastros/bairros", icon: "bi-geo-alt" },
+            { label: "Tipos de Pagamento", to: "/cadastros/tipos-pagamento", icon: "bi-credit-card" },
+            { label: "Perfil de Clientes", to: "/cadastros/perfis-cliente", icon: "bi-person-vcard" },
+            { label: "Tipos de Operação", to: "/cadastros/tipos-operacao", icon: "bi-diagram-3" },
           ],
         },
         {

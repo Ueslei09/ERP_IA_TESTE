@@ -1,10 +1,15 @@
 <!-- src/views/HomeErpView.vue -->
 <template>
   <NavbarErp />
-  <NeighborhoodRegistrationPanel v-if="isNeighborhoodRoute" />
+
+  <RelatorioClientes v-if="isRelatorioClientesRoute" />
+  <Tipodeoperacao v-else-if="isTipoOperacaoRoute" />
+  <CadastroPerfilCliente v-else-if="isPerfilClienteRoute" />
+  <NeighborhoodRegistrationPanel v-else-if="isNeighborhoodRoute" />
   <CityRegistrationPanel v-else-if="isCityRoute" />
   <StateRegistrationPanel v-else-if="isStateRoute" />
-  <CustomerRegistrationPanel v-else-if="isCustomerRoute" />
+  <CadastroTipoPagamento v-else-if="isTipoPagamentoRoute" />
+  <CadastroClientes v-else-if="isCustomerRoute" />
   <HomeErpPanel v-else />
 </template>
 
@@ -13,26 +18,57 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 import NavbarErp from "@/shared/components/NavbarErp.vue";
 import HomeErpPanel from "../components/HomeErpPanel.vue";
-import CustomerRegistrationPanel from "../components/CadastroDeClientes.vue";
-import StateRegistrationPanel from "../components/StateRegistrationPanel.vue";
-import CityRegistrationPanel from "../components/CityRegistration.vue";
-import NeighborhoodRegistrationPanel from "../components/NeighborhoodsPanel.vue";
+
+import StateRegistrationPanel from "@/shared/components/ControlesPessoas/StateRegistrationPanel.vue";
+import CityRegistrationPanel from "@/shared/components/ControlesPessoas/CityRegistration.vue";
+import NeighborhoodRegistrationPanel from "@/shared/components/ControlesPessoas/NeighborhoodsPanel.vue";
+import CadastroTipoPagamento from "@/shared/components/ControlesPessoas/CadastroTipoPagamentos.vue";
+import CadastroClientes from "@/modules/cadastros-gerais/pessoas/cadastro-clientes/components/CadastroClientes.vue";
+import CadastroPerfilCliente from "@/shared/components/ControlesPessoas/CadastroPerfilCliente.vue";
+import Tipodeoperacao from "@/shared/components/ControlesPessoas/Tipodeoperacao.vue";
+import RelatorioClientes from "@/modules/cadastros-gerais/pessoas/relatorios-gerais/relatorio-clientes/components/RelatorioClientes.vue";
 
 const route = useRoute();
 
-const isNeighborhoodRoute = computed(() => {
-  return route.name === "bairros" || route.path === "/cadastros/bairros";
-});
+const isNeighborhoodRoute = computed(
+  () => route.name === "bairros" || route.path === "/cadastros/bairros"
+);
 
-const isCityRoute = computed(() => {
-  return route.name === "cidades" || route.path === "/cadastros/cidades";
-});
+const isCityRoute = computed(
+  () => route.name === "cidades" || route.path === "/cadastros/cidades"
+);
 
-const isStateRoute = computed(() => {
-  return route.name === "estados" || route.path === "/cadastros/estados";
-});
+const isStateRoute = computed(
+  () => route.name === "estados" || route.path === "/cadastros/estados"
+);
 
-const isCustomerRoute = computed(() => {
-  return route.name === "clientes" || route.path === "/cadastros/clientes";
-});
+const isTipoPagamentoRoute = computed(
+  () =>
+    route.name === "tipos-pagamento" ||
+    route.path === "/cadastros/tipos-pagamento"
+);
+
+const isCustomerRoute = computed(
+  () => route.name === "clientes" || route.path === "/cadastros/clientes"
+);
+
+const isPerfilClienteRoute = computed(
+  () =>
+    route.name === "perfis-cliente" ||
+    route.path === "/cadastros/perfis-cliente"
+);
+
+const isTipoOperacaoRoute = computed(
+  () =>
+    route.name === "tipos-operacao" ||
+    route.path === "/cadastros/tipos-operacao"
+);
+
+const isRelatorioClientesRoute = computed(
+  () =>
+    [
+      "/cadastros/relatorios/clientes",
+      "/cadastros-gerais/pessoas/relatorios-gerais/relatorio-clientes",
+    ].includes(route.path) || route.name === "relatorio-clientes"
+);
 </script>

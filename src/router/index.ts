@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../login/views/LoginView.vue";
 import HomeErpView from "../modules/views/HomeErpView.vue";
 
+
 function hasValidSessionToken() {
   if (typeof window === "undefined") return false;
   return Boolean(
@@ -54,6 +55,30 @@ const router = createRouter({
       component: HomeErpView,
       meta: { requiresAuth: true },
     },
+    {
+      path: "/cadastros/tipos-pagamento",
+      name: "tipos-pagamento",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
+    {
+  path: "/cadastros/perfis-cliente",
+  name: "perfis-cliente",
+  component: HomeErpView,
+  meta: { requiresAuth: true },
+  },
+  {
+  path: "/cadastros/tipos-operacao",
+  name: "tipos-operacao",
+  component: HomeErpView,
+  meta: { requiresAuth: true },
+},
+{
+  path: "/cadastros/relatorios/clientes",
+  name: "relatorio-clientes",
+  component: HomeErpView,
+  meta: { requiresAuth: true },
+}
   ],
 });
 

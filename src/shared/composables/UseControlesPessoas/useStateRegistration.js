@@ -6,7 +6,7 @@ import {
   fetchStates,
   saveState,
   removeStateById,
-} from "../services/stateService";
+} from "@/shared/services/ControlesPessoasServices/stateService";
 
 function createEmptyForm() {
   return {
