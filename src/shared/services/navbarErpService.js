@@ -38,6 +38,8 @@ export const navbarErpConfig = {
           icon: "bi-sliders",
           routines: [
             { label: "Estados (UF / ICMS / DIFAL)", to: "/cadastros/estados", icon: "bi-map" },
+            { label: "Cadastro de Cidades", to: "/cadastros/cidades", icon: "bi-building" },
+            { label: "Cadastro de Bairros", to: "/cadastros/bairros", icon: "bi-geo-alt" },
           ],
         },
         {

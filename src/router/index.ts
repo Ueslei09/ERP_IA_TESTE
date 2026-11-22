@@ -1,7 +1,7 @@
+// src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../login/views/LoginView.vue";
-import HomeErpView from "../modules/views/HomeErpView.vue"; 
-// ajuste o caminho se necessário
+import HomeErpView from "../modules/views/HomeErpView.vue";
 
 function hasValidSessionToken() {
   if (typeof window === "undefined") return false;
@@ -31,15 +31,29 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-    path: "/cadastros/clientes",
-    name: "clientes",
-    component: HomeErpView,
-  },
-  {
-  path: "/cadastros/estados",
-  name: "estados",
-  component: HomeErpView,
-},
+      path: "/cadastros/clientes",
+      name: "clientes",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/cadastros/estados",
+      name: "estados",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/cadastros/cidades",
+      name: "cidades",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/cadastros/bairros",
+      name: "bairros",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
   ],
 });
 
