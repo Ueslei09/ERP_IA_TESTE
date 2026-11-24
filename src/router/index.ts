@@ -78,7 +78,19 @@ const router = createRouter({
   name: "relatorio-clientes",
   component: HomeErpView,
   meta: { requiresAuth: true },
-}
+},
+{
+  path: "/cadastros/departamentos",
+  name: "departamentos",
+  component: HomeErpView,
+  meta: { requiresAuth: true },
+},
+{
+  path: "/cadastros/funcionarios",
+  name: "funcionarios",
+  component: HomeErpView,
+  meta: { requiresAuth: true },
+},
   ],
 });
 

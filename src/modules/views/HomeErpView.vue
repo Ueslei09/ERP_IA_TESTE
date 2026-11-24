@@ -3,6 +3,8 @@
   <NavbarErp />
 
   <RelatorioClientes v-if="isRelatorioClientesRoute" />
+  <CadastroFuncionario v-else-if="isFuncionarioRoute" />
+  <CadastroDepartamento v-else-if="isDepartamentoRoute" />
   <Tipodeoperacao v-else-if="isTipoOperacaoRoute" />
   <CadastroPerfilCliente v-else-if="isPerfilClienteRoute" />
   <NeighborhoodRegistrationPanel v-else-if="isNeighborhoodRoute" />
@@ -27,7 +29,8 @@ import CadastroClientes from "@/modules/cadastros-gerais/pessoas/cadastro-client
 import CadastroPerfilCliente from "@/shared/components/ControlesPessoas/CadastroPerfilCliente.vue";
 import Tipodeoperacao from "@/shared/components/ControlesPessoas/Tipodeoperacao.vue";
 import RelatorioClientes from "@/modules/cadastros-gerais/pessoas/relatorios-gerais/relatorio-clientes/components/RelatorioClientes.vue";
-
+import CadastroDepartamento from "@/shared/components/ControlesPessoas/CadastroDepartamento.vue";
+import CadastroFuncionario from "@/modules/cadastros-gerais/cadastro-funcionarios/components/CadastroFuncionarios.vue";
 const route = useRoute();
 
 const isNeighborhoodRoute = computed(
@@ -70,5 +73,16 @@ const isRelatorioClientesRoute = computed(
       "/cadastros/relatorios/clientes",
       "/cadastros-gerais/pessoas/relatorios-gerais/relatorio-clientes",
     ].includes(route.path) || route.name === "relatorio-clientes"
+);
+
+const isDepartamentoRoute = computed(
+  () =>
+    route.name === "departamentos" ||
+    route.path === "/cadastros/departamentos"
+);
+const isFuncionarioRoute = computed(
+  () =>
+    route.name === "funcionarios" ||
+    route.path === "/cadastros/funcionarios"
 );
 </script>

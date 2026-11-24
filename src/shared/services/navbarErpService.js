@@ -60,6 +60,8 @@ export const navbarErpConfig = {
             { label: "Tipos de Pagamento", to: "/cadastros/tipos-pagamento", icon: "bi-credit-card" },
             { label: "Perfil de Clientes", to: "/cadastros/perfis-cliente", icon: "bi-person-vcard" },
             { label: "Tipos de Operação", to: "/cadastros/tipos-operacao", icon: "bi-diagram-3" },
+            { label: "Cadastro de Departamentos", to: "/cadastros/departamentos", icon: "bi-diagram-2",},
+            {label: "Cadastro de Funcionários",to: "/cadastros/funcionarios",icon: "bi-person-badge",},
           ],
         },
         {
