@@ -91,6 +91,12 @@ const router = createRouter({
   component: HomeErpView,
   meta: { requiresAuth: true },
 },
+{
+      path: "/cadastros/usuarios",
+      name: "usuarios",
+      component: HomeErpView,
+      meta: { requiresAuth: true },
+    },
   ],
 });
 

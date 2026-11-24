@@ -4,6 +4,7 @@
 
   <RelatorioClientes v-if="isRelatorioClientesRoute" />
   <CadastroFuncionario v-else-if="isFuncionarioRoute" />
+  <CadastroUsuario v-else-if="isUsuarioRoute" />
   <CadastroDepartamento v-else-if="isDepartamentoRoute" />
   <Tipodeoperacao v-else-if="isTipoOperacaoRoute" />
   <CadastroPerfilCliente v-else-if="isPerfilClienteRoute" />
@@ -31,6 +32,7 @@ import Tipodeoperacao from "@/shared/components/ControlesPessoas/Tipodeoperacao.
 import RelatorioClientes from "@/modules/cadastros-gerais/pessoas/relatorios-gerais/relatorio-clientes/components/RelatorioClientes.vue";
 import CadastroDepartamento from "@/shared/components/ControlesPessoas/CadastroDepartamento.vue";
 import CadastroFuncionario from "@/modules/cadastros-gerais/cadastro-funcionarios/components/CadastroFuncionarios.vue";
+import CadastroUsuario from "@/modules/cadastros-gerais/cadastro-usuarios/components/CadastroUsuario.vue";
 const route = useRoute();
 
 const isNeighborhoodRoute = computed(
@@ -84,5 +86,9 @@ const isFuncionarioRoute = computed(
   () =>
     route.name === "funcionarios" ||
     route.path === "/cadastros/funcionarios"
+);
+
+const isUsuarioRoute = computed(
+  () => route.name === "usuarios" || route.path === "/cadastros/usuarios"
 );
 </script>
